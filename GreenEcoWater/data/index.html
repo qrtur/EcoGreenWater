@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenEcoWhater</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="img/eva.png">
+    <script src="js/config.js"></script>
+</head>
+<body onload="paginaIniciada();">   
+    <header>
+        <h1>GreenEcoWater</h1>
+    </header>
+    <div id="content">
+        <h2>Coleta de dados</h2>
+        <table>
+            <tr>
+                <th>Umidade do Solo</th>
+                <td id="textoUmidade">aguardando dados</td>
+            </tr>
+            <tr>
+                <th>Litros Utilizados</th>
+                <td id="textoLitros">aguardando dados</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td id="textoStatus">aguardando dados</td>
+            </tr>
+            <tr>
+                <th>API</th>
+                <td><a target="_blank" href="/api/data">/api/data</a></td>
+            </tr>
+        </table>
+        <div>
+            <canvas id="grafico" style="width: 100%; height:200px; margin: 0 auto;"></canvas>
+        </div>
+        <h2>Configuração</h2>
+        <table>
+            <tr>
+                <th>Auto Irrigar</th>
+                <td>
+                    <input type="radio" id="formAutoIrrigarON" name="formAutoIrrigar" value="1">
+                    <label for="formAutoIrrigarON">Ligado</label><br>
+                    <input type="radio" id="formAutoIrrigarOFF" name="formAutoIrrigar" value="0" checked>
+                    <label for="formAutoIrrigarOFF">Desligado</label><br>
+                </td>
+            </tr>
+            <tr>
+                <th>% de Umidade para iniciar a Irrigação</th>
+                <td>
+                    <input type="range" id="sliderumidadeInicial" name="umidadeInicial" min="0" max="100" value="0" step="1" onchange="viewSlider (this.name,this.value, '%')">
+                    <span id="viewumidadeInicial">0%</span>
+                </td>
+            </tr>
+            <tr>
+                <th>% de Umidade para parar a Irrigação</th>
+                <td>
+                    <input type="range" id="sliderumidadeFinal" name="umidadeFinal" min="10" max="100" value="50" step="1" onchange="viewSlider (this.name,this.value, '%')">
+                    <span id="viewumidadeFinal">50%</span>
+                </td>
+            </tr>
+            <tr>
+                <th>Tempo de Irrigação</th>
+                <td>
+                    <input type="range" id="slidertempoIrrigacao" name="tempoIrrigacao" min="100" max="2000" value="100" step="100" onchange="viewSlider (this.name,this.value, 'ms');">
+                    <span id="viewtempoIrrigacao">100 ms</span>
+                </td>
+            </tr>
+            <tr>
+                <th>Tempo entre Irrigações</th>
+                <td>
+                    <input type="range" id="slidertempoEntreIrrigacao" name="tempoEntreIrrigacao" min="1000" max="30000" value="3000" step="1000" onchange="viewSlider (this.name,this.value, 'ms');">
+                    <span id="viewtempoEntreIrrigacao">30000 ms</span>
+                </td>
+            </tr>
+            <tr>
+                <th>Tempo de inicio bomba</th>
+                <td>
+                    <input type="range" id="slidertempoDeInicioBomba" name="tempoDeInicioBomba" min="100" max="2500" value="1200" step="50" onchange="viewSlider (this.name,this.value, 'ms');">
+                    <span id="viewtempoDeInicioBomba">1200 ms</span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <button onclick="salvaConfigArduino ();">Salvar</button>
+                </td>
+            </tr>
+
+        </table>
+
+        <h2>Testes</h2>
+
+        Quantidade de mililitros do teste: <input type="number" id="testeIrrigacaoMl" value="10" min="5" max="100"> <br>
+        <button onclick="testarIrrigacao ();">testar irrigação</button> <br><br>
+        <button onclick="sairProcessoIrrigacao ();">sair de processo de irrigação</button> <br><br>
+    </div>
+</body>
+</html>
